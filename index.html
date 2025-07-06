@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Your Name] | ML Engineer & Data Scientist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        /* Custom Styles for Apple Theme */
+        :root {
+            --background-light: #f5f5f7;
+            --text-light: #1d1d1f;
+            --secondary-text-light: #515154;
+            --link-light: #0066cc;
+            --border-light: #d2d2d7;
+            --card-bg-light: rgba(255, 255, 255, 0.4); /* Increased transparency */
+            --modal-bg-light: rgba(255, 255, 255, 0.75);
+
+
+            --background-dark: #000000;
+            --text-dark: #f5f5f7;
+            --secondary-text-dark: #a1a1a6;
+            --link-dark: #2997ff;
+            --border-dark: #424245;
+            --card-bg-dark: rgba(29, 29, 31, 0.4); /* Increased transparency */
+            --modal-bg-dark: rgba(29, 29, 31, 0.75);
+        }
+
+        .dark {
+            --background: var(--background-dark);
+            --text-primary: var(--text-dark);
+            --text-secondary: var(--secondary-text-dark);
+            --link: var(--link-dark);
+            --border: var(--border-dark);
+            --card-bg: var(--card-bg-dark);
+            --modal-bg: var(--modal-bg-dark);
+        }
+
+        html:not(.dark) {
+            --background: var(--background-light);
+            --text-primary: var(--text-light);
+            --text-secondary: var(--secondary-text-light);
+            --link: var(--link-light);
+            --border: var(--border-light);
+            --card-bg: var(--card-bg-light);
+            --modal-bg: var(--modal-bg-light);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            /* Hide scrollbar for IE, Edge and Firefox */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        #content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+        
+        p {
+            color: var(--text-secondary);
+        }
+
+        .apple-button {
+            background-color: var(--link);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 980px;
+            font-weight: 500;
+            transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55), background-color 0.2s;
+            display: inline-block;
+        }
+        
+        .apple-button:hover {
+            background-color: #0071e3;
+            transform: scale(1.05);
+        }
+        
+        .dark .apple-button:hover {
+             background-color: #4daaff;
+        }
+        
+        .social-icon {
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: var(--link);
+            transform: scale(1.1);
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .card .card-image-wrapper img {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .card:hover .card-image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        /* Scroll-based Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 100;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-overlay.visible {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-container {
+            background-color: var(--modal-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 800px;
+            z-index: 101;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            max-height: 90vh;
+            overflow-y: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .modal-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .modal-overlay.visible .modal-container {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0,0,0,0.3);
+            color: white;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 102;
+        }
+
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: opacity 0.3s, visibility 0.3s;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-to-top.visible {
+            display: flex;
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    
+    <div id="particle-canvas"></div>
+
+    <div id="content">
+        <!-- Header -->
+        <header id="main-header" class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl transition-all duration-300">
+            <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+                <a href="#" class="text-xl font-semibold" style="color: var(--text-primary);">[Your Name]</a>
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#about" class="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-300">About</a>
+                    <a href="#projects" class="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-300">Projects</a>
+                    <a href="#skills" class="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-300">Skills</a>
+                    <a href="#contact" class="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-300">Contact</a>
+                </nav>
+                <div class="flex items-center">
+                     <button id="theme-toggle" class="mr-4 focus:outline-none text-gray-500 dark:text-gray-400">
+                        <svg id="theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                        <svg id="theme-toggle-light-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 5.05a1 1 0 010 1.414l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 0zM3 11a1 1 0 100-2H2a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                    </button>
+                    <button id="mobile-menu-button" class="md:hidden focus:outline-none text-gray-500 dark:text-gray-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white/60 dark:bg-black/50 backdrop-blur-lg border-t border-neutral-200 dark:border-neutral-800">
+                <a href="#about" class="block py-3 px-6 text-base text-gray-700 dark:text-gray-300 hover:bg-gray-50/50 dark:hover:bg-gray-900/50">About</a>
+                <a href="#projects" class="block py-3 px-6 text-base text-gray-700 dark:text-gray-300 hover:bg-gray-50/50 dark:hover:bg-gray-900/50">Projects</a>
+                <a href="#skills" class="block py-3 px-6 text-base text-gray-700 dark:text-gray-300 hover:bg-gray-50/50 dark:hover:bg-gray-900/50">Skills</a>
+                <a href="#contact" class="block py-3 px-6 text-base text-gray-700 dark:text-gray-300 hover:bg-gray-50/50 dark:hover:bg-gray-900/50">Contact</a>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-screen flex items-center justify-center text-center px-6 pt-24 pb-12">
+            <div class="max-w-4xl mx-auto reveal">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter">
+                    Machine Learning Engineer. <br/> Data Scientist.
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl lg:text-2xl" style="color: var(--text-secondary);">
+                    I design and build intelligent systems that solve real-world challenges, turning complex data into impactful solutions.
+                </p>
+                <div class="mt-10">
+                    <a href="#projects" class="apple-button">See My Work</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 md:py-32 px-6">
+            <div class="container mx-auto max-w-5xl">
+                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16 reveal">
+                    <div class="w-full md:w-1/3 flex-shrink-0">
+                         <img src="https://placehold.co/400x400/000000/F5F5F7?text=Profile" alt="Your Name" class="rounded-full w-48 h-48 md:w-64 md:h-64 mx-auto object-cover shadow-2xl">
+                    </div>
+                    <div class="w-full md:w-2/3 text-center md:text-left">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">A bit about me.</h2>
+                        <p class="text-lg mb-4">
+                            I'm a Machine Learning Engineer with a passion for Deep Learning and Data Science. My expertise lies in architecting and deploying robust models that drive innovation and efficiency. I thrive on transforming theoretical concepts into tangible, high-impact applications.
+                        </p>
+                        <p class="text-lg">
+                            With a background in [Your Degree/Field] and hands-on experience in [mention a specific industry or problem type], I'm always eager to tackle the next big challenge in AI.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 md:py-32 px-6">
+            <div class="container mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 reveal">Selected Projects.</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                    <!-- Project 1 -->
+                    <div class="card reveal">
+                        <div class="card-image-wrapper overflow-hidden h-64">
+                            <img src="https://placehold.co/600x400/1d1d1f/f5f5f7?text=Project+1" alt="Project 1 Visual" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold mb-2">Image Style Transfer</h3>
+                            <p class="mb-4 flex-grow">A deep learning model that applies the style of one image to the content of another, using convolutional neural networks.</p>
+                            <button data-modal-target="modal-project-1" class="font-semibold open-modal-btn" style="color: var(--link);">Learn more &rarr;</button>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="card reveal">
+                         <div class="card-image-wrapper overflow-hidden h-64">
+                            <img src="https://placehold.co/600x400/1d1d1f/f5f5f7?text=Project+2" alt="Project 2 Visual" class="w-full h-full object-cover">
+                        </div>
+                         <div class="p-8">
+                            <h3 class="text-2xl font-bold mb-2">Sentiment Analysis API</h3>
+                            <p class="mb-4 flex-grow">A RESTful API that classifies text sentiment. Deployed as a scalable microservice using Docker and FastAPI.</p>
+                            <button data-modal-target="modal-project-2" class="font-semibold open-modal-btn" style="color: var(--link);">Learn more &rarr;</button>
+                        </div>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="card reveal">
+                        <div class="card-image-wrapper overflow-hidden h-64">
+                           <img src="https://placehold.co/600x400/1d1d1f/f5f5f7?text=Project+3" alt="Project 3 Visual" class="w-full h-full object-cover">
+                       </div>
+                        <div class="p-8">
+                           <h3 class="text-2xl font-bold mb-2">Predictive Maintenance</h3>
+                           <p class="mb-4 flex-grow">An LSTM-based model to predict equipment failure by analyzing sensor data from industrial machinery.</p>
+                           <button data-modal-target="modal-project-3" class="font-semibold open-modal-btn" style="color: var(--link);">Learn more &rarr;</button>
+                       </div>
+                   </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 md:py-32 px-6">
+            <div class="container mx-auto text-center max-w-4xl">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 reveal">Core Competencies.</h2>
+                <p class="text-lg md:text-xl mb-12 reveal" style="color: var(--text-secondary);">I have experience with a wide range of technologies in the AI and data ecosystem.</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 reveal">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3">Languages</h3>
+                        <ul class="space-y-2" style="color: var(--text-secondary);">
+                            <li>Python</li>
+                            <li>SQL</li>
+                            <li>JavaScript</li>
+                            <li>C++</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3">Frameworks</h3>
+                        <ul class="space-y-2" style="color: var(--text-secondary);">
+                            <li>PyTorch</li>
+                            <li>TensorFlow</li>
+                            <li>Scikit-learn</li>
+                            <li>Hugging Face</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3">Tools</h3>
+                        <ul class="space-y-2" style="color: var(--text-secondary);">
+                            <li>Docker</li>
+                            <li>Git & GitHub</li>
+                            <li>AWS / GCP</li>
+                            <li>Kubernetes</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3">Databases</h3>
+                        <ul class="space-y-2" style="color: var(--text-secondary);">
+                            <li>PostgreSQL</li>
+                            <li>MongoDB</li>
+                            <li>BigQuery</li>
+                            <li>Redis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <footer id="contact" class="py-20 px-6 border-t" style="border-color: var(--border);">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 reveal">Let's Connect.</h2>
+                <p class="mb-8 max-w-lg mx-auto reveal" style="color: var(--text-secondary);">
+                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious vision.
+                </p>
+                 <div class="reveal mb-10">
+                    <a href="mailto:your-email@example.com" class="apple-button">Say Hello</a>
+                </div>
+                <div class="flex justify-center space-x-6 reveal">
+                    <a href="mailto:your-email@example.com" class="social-icon">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"></path></svg>
+                    </a>
+                    <a href="https://github.com/your-username" target="_blank" class="social-icon">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.745 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"></path></svg>
+                    </a>
+                    <a href="https://linkedin.com/in/your-username" target="_blank" class="social-icon">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                    </a>
+                    <a href="https://instagram.com/your-username" target="_blank" class="social-icon">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.585.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.644-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"></path></svg>
+                    </a>
+                </div>
+                <p class="text-sm mt-10" style="color: var(--text-secondary);">&copy; 2024 [Your Name]. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Modals -->
+    <div id="modal-project-1" class="modal-overlay">
+        <div class="modal-container">
+            <div class="relative">
+                <img src="https://placehold.co/800x500/1d1d1f/f5f5f7?text=Style+Transfer" class="w-full h-auto rounded-t-2xl" alt="Project 1 Hero Image">
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div class="p-8 md:p-12">
+                <h3 class="text-3xl font-bold mb-4">Image Style Transfer</h3>
+                <p class="mb-6">This project implements the neural style transfer technique, which separates and recombines the content and style of arbitrary images. It uses a pre-trained VGG-19 network to extract feature representations and iteratively optimizes a new image to match the content of one image and the style of another.</p>
+                <h4 class="text-xl font-semibold mb-3">Key Features:</h4>
+                <ul class="list-disc list-inside mb-6 space-y-1" style="color: var(--text-secondary);">
+                    <li>Content and style weight balancing</li>
+                    <li>Multi-scale style extraction</li>
+                    <li>Optimized for high-resolution output</li>
+                </ul>
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://github.com/your-username/style-transfer-project" target="_blank" class="apple-button">View Code</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-project-2" class="modal-overlay">
+        <div class="modal-container">
+            <div class="relative">
+                <img src="https://placehold.co/800x500/1d1d1f/f5f5f7?text=Sentiment+API" class="w-full h-auto rounded-t-2xl" alt="Project 2 Hero Image">
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div class="p-8 md:p-12">
+                <h3 class="text-3xl font-bold mb-4">Sentiment Analysis API</h3>
+                <p class="mb-6">A high-performance RESTful API built with FastAPI that provides real-time sentiment analysis (positive, neutral, negative) for any given text. The model is based on a fine-tuned BERT architecture and the entire application is containerized with Docker for easy deployment and scalability.</p>
+                <h4 class="text-xl font-semibold mb-3">Key Features:</h4>
+                <ul class="list-disc list-inside mb-6 space-y-1" style="color: var(--text-secondary);">
+                    <li>Fast inference times (&lt;50ms)</li>
+                    <li>Dockerized for portability</li>
+                    <li>Interactive API documentation via Swagger UI</li>
+                </ul>
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://github.com/your-username/sentiment-api-project" target="_blank" class="apple-button">View Code</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-project-3" class="modal-overlay">
+        <div class="modal-container">
+            <div class="relative">
+                <img src="https://placehold.co/800x500/1d1d1f/f5f5f7?text=Predictive+Maintenance" class="w-full h-auto rounded-t-2xl" alt="Project 3 Hero Image">
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div class="p-8 md:p-12">
+                <h3 class="text-3xl font-bold mb-4">Predictive Maintenance</h3>
+                <p class="mb-6">This project leverages time-series data from IoT sensors on industrial equipment to predict potential failures before they occur. An LSTM (Long Short-Term Memory) network was trained to recognize patterns indicative of future malfunctions, allowing for proactive maintenance scheduling.</p>
+                <h4 class="text-xl font-semibold mb-3">Key Features:</h4>
+                <ul class="list-disc list-inside mb-6 space-y-1" style="color: var(--text-secondary);">
+                    <li>Time-series data preprocessing and feature engineering</li>
+                    <li>LSTM model for sequence prediction</li>
+                    <li>Visualization dashboard for failure probability</li>
+                </ul>
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://github.com/your-username/predictive-maintenance-project" target="_blank" class="apple-button">View Code</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="scroll-to-top" class="scroll-to-top">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Theme Toggler ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                themeToggleLightIcon.classList.remove('hidden');
+                document.documentElement.classList.add('dark');
+            } else {
+                themeToggleDarkIcon.classList.remove('hidden');
+                document.documentElement.classList.remove('dark')
+            }
+
+            themeToggleBtn.addEventListener('click', function() {
+                themeToggleDarkIcon.classList.toggle('hidden');
+                themeToggleLightIcon.classList.toggle('hidden');
+                if (localStorage.getItem('color-theme')) {
+                    if (localStorage.getItem('color-theme') === 'light') {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    }
+                } else {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    }
+                }
+            });
+
+            // --- Mobile Menu ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- Smooth Scrolling for Nav Links ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#') {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        return;
+                    }
+                    if (href.length > 1) {
+                        try {
+                            const targetElement = document.querySelector(href);
+                            if (targetElement) {
+                                e.preventDefault();
+                                targetElement.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        } catch (error) {
+                            console.error("Could not scroll to element:", error);
+                        }
+                    }
+                });
+            });
+
+            // --- Scroll-based Logic ---
+            const header = document.getElementById('main-header');
+            const revealElements = document.querySelectorAll('.reveal');
+            const scrollToTopBtn = document.getElementById('scroll-to-top');
+            
+            const handleScroll = () => {
+                // Header style on scroll
+                if (window.scrollY > 10) {
+                    header.classList.add('bg-white/60', 'dark:bg-black/50', 'border-b', 'border-neutral-200', 'dark:border-neutral-800');
+                } else {
+                    header.classList.remove('bg-white/60', 'dark:bg-black/50', 'border-b', 'border-neutral-200', 'dark:border-neutral-800');
+                }
+
+                // Reveal elements on scroll
+                const windowHeight = window.innerHeight;
+                revealElements.forEach(el => {
+                    const elementTop = el.getBoundingClientRect().top;
+                    const elementVisible = 100;
+                    if (elementTop < windowHeight - elementVisible) {
+                        el.classList.add('visible');
+                    } else {
+                        el.classList.remove('visible');
+                    }
+                });
+
+                // Show/hide scroll-to-top button
+                if (window.scrollY > 400) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+
+                // Auto-close mobile menu on scroll
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            };
+
+            window.addEventListener('scroll', handleScroll);
+            handleScroll();
+
+            // --- Scroll to Top Button Click ---
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // --- Modal Logic ---
+            const openModalButtons = document.querySelectorAll('[data-modal-target]');
+            
+            openModalButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const modalId = button.getAttribute('data-modal-target');
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        modal.classList.add('visible');
+                        document.body.classList.add('modal-open');
+                    }
+                });
+            });
+
+            const closeModal = (modal) => {
+                modal.classList.remove('visible');
+                document.body.classList.remove('modal-open');
+            };
+
+            document.querySelectorAll('.modal-overlay').forEach(overlay => {
+                overlay.addEventListener('click', (e) => {
+                    // Close if the direct target is the overlay itself
+                    if (e.target === overlay) {
+                        closeModal(overlay);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.modal-close-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const modal = button.closest('.modal-overlay');
+                    closeModal(modal);
+                });
+            });
+
+            // --- Three.js Particle Background ---
+            let scene, camera, renderer, points;
+            let mouseX = 0, mouseY = 0;
+
+            function initThree() {
+                const container = document.getElementById('particle-canvas');
+                scene = new THREE.Scene();
+                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                camera.position.z = 50;
+
+                renderer = new THREE.WebGLRenderer({ alpha: true });
+                renderer.setPixelRatio(window.devicePixelRatio);
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                container.appendChild(renderer.domElement);
+
+                const geometry = new THREE.BufferGeometry();
+                const vertices = [];
+                const numPoints = 1500;
+
+                for (let i = 0; i < numPoints; i++) {
+                    const x = (Math.random() - 0.5) * 100;
+                    const y = (Math.random() - 0.5) * 100;
+                    const z = (Math.random() - 0.5) * 100;
+                    vertices.push(x, y, z);
+                }
+
+                geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+
+                const material = new THREE.PointsMaterial({
+                    size: 0.1,
+                    color: 0xa1a1a6,
+                    transparent: true,
+                    opacity: 0.8
+                });
+
+                points = new THREE.Points(geometry, material);
+                scene.add(points);
+                
+                document.addEventListener('mousemove', onMouseMove, false);
+                window.addEventListener('resize', onWindowResize, false);
+                animate();
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+                camera.position.x += (mouseX - camera.position.x) * 0.05;
+                camera.position.y += (-mouseY - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+                points.rotation.x += 0.0005;
+                points.rotation.y += 0.001;
+                renderer.render(scene, camera);
+            }
+
+            function onWindowResize() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+            
+            function onMouseMove(event) {
+                mouseX = (event.clientX - window.innerWidth / 2) / 50;
+                mouseY = (event.clientY - window.innerHeight / 2) / 50;
+            }
+
+            initThree();
+        });
+    </script>
+</body>
+</html>
