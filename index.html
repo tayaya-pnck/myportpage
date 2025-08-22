@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Your Name] | ML Engineer & Data Scientist</title>
+    <title>Athaya | ML Engineer & Data Scientist</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
             --secondary-text-light: #515154;
             --link-light: #0066cc;
             --border-light: #d2d2d7;
-            --card-bg-light: rgba(255, 255, 255, 0.4); /* Increased transparency */
+            --card-bg-light: rgba(255, 255, 255, 0.4);
             --modal-bg-light: rgba(255, 255, 255, 0.75);
 
 
@@ -26,7 +26,7 @@
             --secondary-text-dark: #a1a1a6;
             --link-dark: #2997ff;
             --border-dark: #424245;
-            --card-bg-dark: rgba(29, 29, 31, 0.4); /* Increased transparency */
+            --card-bg-dark: rgba(29, 29, 31, 0.4);
             --modal-bg-dark: rgba(29, 29, 31, 0.75);
         }
 
@@ -258,14 +258,10 @@
     <div id="particle-canvas"></div>
 
     <div id="content">
-        <!-- Header -->    
-
-<!-- ini biar ada yang ditambahi -->
-
-
+        <!-- Header -->
         <header id="main-header" class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl transition-all duration-300">
-            <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-                <a href="#" class="text-xl font-semibold" style="color: var(--text-primary);">[Your Name]</a>
+            <div class="container mx-auto px-6 lg:px-8 py-3 flex justify-between items-center">
+                <a href="#" class="text-xl font-semibold" style="color: var(--text-primary);">Athaya Hanif</a>
                 <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
                     <a href="#about" class="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-300">About</a>
                     <a href="#projects" class="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-300">Projects</a>
@@ -292,12 +288,12 @@
         </header>
 
         <!-- Hero Section -->
-        <section id="hero" class="min-h-screen flex items-center justify-center text-center px-6 pt-24 pb-12">
-            <div class="max-w-4xl mx-auto reveal">
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter">
+        <section id="hero" class="min-h-screen flex items-center justify-center text-center px-6 lg:px-8 pt-24 pb-12">
+            <div class="max-w-5xl mx-auto reveal">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tighter">
                     Machine Learning Engineer. <br/> Data Scientist.
                 </h1>
-                <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl lg:text-2xl" style="color: var(--text-secondary);">
+                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl lg:text-2xl" style="color: var(--text-secondary);">
                     I design and build intelligent systems that solve real-world challenges, turning complex data into impactful solutions.
                 </p>
                 <div class="mt-10">
@@ -307,11 +303,11 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-20 md:py-32 px-6">
-            <div class="container mx-auto max-w-5xl">
+        <section id="about" class="py-20 md:py-32 px-6 lg:px-8">
+            <div class="container mx-auto max-w-6xl">
                 <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16 reveal">
                     <div class="w-full md:w-1/3 flex-shrink-0">
-                         <img src="https://placehold.co/400x400/000000/F5F5F7?text=Profile" alt="Your Name" class="rounded-full w-48 h-48 md:w-64 md:h-64 mx-auto object-cover shadow-2xl">
+                         <img src="assets/IMG-20231031-WA0009.jpg" alt="Your Name" class="rounded-full w-48 h-48 md:w-64 md:h-64 mx-auto object-cover shadow-2xl">
                     </div>
                     <div class="w-full md:w-2/3 text-center md:text-left">
                         <h2 class="text-3xl md:text-4xl font-bold mb-4">A bit about me.</h2>
@@ -319,7 +315,7 @@
                             I'm a Machine Learning Engineer with a passion for Deep Learning and Data Science. My expertise lies in architecting and deploying robust models that drive innovation and efficiency. I thrive on transforming theoretical concepts into tangible, high-impact applications.
                         </p>
                         <p class="text-lg">
-                            With a background in [Your Degree/Field] and hands-on experience in [mention a specific industry or problem type], I'm always eager to tackle the next big challenge in AI.
+                            As a Machine Learning and Data Science practitioner, I’ve engineered effective solutions across multiple domains—from tabular predictive models and computer vision pipelines to NLP tasks. Equipped with a hands-on approach and strong problem-solving skills, I’m always eager to tackle the next big AI challenge and make a measurable impact.
                         </p>
                     </div>
                 </div>
@@ -327,140 +323,222 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="py-20 md:py-32 px-6">
+        <section id="projects" class="py-20 md:py-32 px-6 lg:px-8">
             <div class="container mx-auto">
                 <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 reveal">Selected Projects.</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-screen-xl mx-auto">
                     <!-- Project 1 -->
-                    <div class="card reveal">
+                    <div class="card reveal cursor-pointer" onclick="document.getElementById('modal-project-1').classList.add('visible'); document.body.classList.add('modal-open');">
                         <div class="card-image-wrapper overflow-hidden h-64">
-                            <img src="https://placehold.co/600x400/1d1d1f/f5f5f7?text=Project+1" alt="Project 1 Visual" class="w-full h-full object-cover">
+                            <img src="assets/SER.jpg" alt="Project 1 Visual" class="w-full h-full object-cover">
                         </div>
                         <div class="p-8">
-                            <h3 class="text-2xl font-bold mb-2">Image Style Transfer</h3>
-                            <p class="mb-4 flex-grow">A deep learning model that applies the style of one image to the content of another, using convolutional neural networks.</p>
-                            <button data-modal-target="modal-project-1" class="font-semibold open-modal-btn" style="color: var(--link);">Learn more &rarr;</button>
+                            <h3 class="text-2xl font-bold mb-2">Speech Emotion Recognition (Audio Based)</h3>
+                            <p class="mb-4 flex-grow">Developed a Speech Emotion Recognition (SER) system leveraging Mel-Frequency Cepstral Coefficients (MFCC) for effective audio feature extraction, processed through a Convolutional Neural Network (CNN) to classify core emotions such as happiness, anger, sadness, and neutrality.</p>
+                            <!-- <button data-modal-target="modal-project-1" class="font-semibold open-modal-btn" style="color: var(--link);">Learn more &rarr;</button> -->
                         </div>
                     </div>
                     <!-- Project 2 -->
-                    <div class="card reveal">
+                    <div class="card reveal cursor-pointer" onclick="document.getElementById('modal-project-2').classList.add('visible'); document.body.classList.add('modal-open');">
                          <div class="card-image-wrapper overflow-hidden h-64">
                             <img src="https://placehold.co/600x400/1d1d1f/f5f5f7?text=Project+2" alt="Project 2 Visual" class="w-full h-full object-cover">
                         </div>
                          <div class="p-8">
-                            <h3 class="text-2xl font-bold mb-2">Sentiment Analysis API</h3>
-                            <p class="mb-4 flex-grow">A RESTful API that classifies text sentiment. Deployed as a scalable microservice using Docker and FastAPI.</p>
-                            <button data-modal-target="modal-project-2" class="font-semibold open-modal-btn" style="color: var(--link);">Learn more &rarr;</button>
+                            <h3 class="text-2xl font-bold mb-2">Lung Sound Classification Based on Audio</h3>
+                            <p class="mb-4 flex-grow">Lung Sound Classification Model based on respiratory audio using CNN-BiGRU architecture with adaptive denoising pipeline</p>
+                            <!-- <button data-modal-target="modal-project-2" class="font-semibold open-modal-btn" style="color: var(--link);">Learn more &rarr;</button> -->
                         </div>
                     </div>
                     <!-- Project 3 -->
-                    <div class="card reveal">
+                    <div class="card reveal cursor-pointer" onclick="document.getElementById('modal-project-3').classList.add('visible'); document.body.classList.add('modal-open');">
                         <div class="card-image-wrapper overflow-hidden h-64">
                            <img src="https://placehold.co/600x400/1d1d1f/f5f5f7?text=Project+3" alt="Project 3 Visual" class="w-full h-full object-cover">
                        </div>
                         <div class="p-8">
-                           <h3 class="text-2xl font-bold mb-2">Predictive Maintenance</h3>
-                           <p class="mb-4 flex-grow">An LSTM-based model to predict equipment failure by analyzing sensor data from industrial machinery.</p>
-                           <button data-modal-target="modal-project-3" class="font-semibold open-modal-btn" style="color: var(--link);">Learn more &rarr;</button>
+                           <h3 class="text-2xl font-bold mb-2">Smoker Classification</h3>
+                           <p class="mb-4 flex-grow">Classifies weather a person is a smoker based on body signals using Naive Bayes Algorithm</p>
+                           <!-- <button data-modal-target="modal-project-3" class="font-semibold open-modal-btn" style="color: var(--link);">Learn more &rarr;</button> -->
                        </div>
                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="py-20 md:py-32 px-6">
-            <div class="container mx-auto text-center max-w-4xl">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 reveal">Core Competencies.</h2>
-                <p class="text-lg md:text-xl mb-12 reveal" style="color: var(--text-secondary);">I have experience with a wide range of technologies in the AI and data ecosystem.</p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 reveal">
-                    <div>
-                        <h3 class="text-xl font-semibold mb-3">Languages</h3>
-                        <ul class="space-y-2" style="color: var(--text-secondary);">
-                            <li>Python</li>
-                            <li>SQL</li>
-                            <li>JavaScript</li>
-                            <li>C++</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-3">Frameworks</h3>
-                        <ul class="space-y-2" style="color: var(--text-secondary);">
-                            <li>PyTorch</li>
-                            <li>TensorFlow</li>
-                            <li>Scikit-learn</li>
-                            <li>Hugging Face</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-3">Tools</h3>
-                        <ul class="space-y-2" style="color: var(--text-secondary);">
-                            <li>Docker</li>
-                            <li>Git & GitHub</li>
-                            <li>AWS / GCP</li>
-                            <li>Kubernetes</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-3">Databases</h3>
-                        <ul class="space-y-2" style="color: var(--text-secondary);">
-                            <li>PostgreSQL</li>
-                            <li>MongoDB</li>
-                            <li>BigQuery</li>
-                            <li>Redis</li>
-                        </ul>
-                    </div>
-                </div>
+<!-- Replace the existing skills section with this: -->
+
+<section id="skills" class="py-20 md:py-32 px-6 lg:px-8">
+    <div class="container mx-auto text-center max-w-5xl">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 reveal">Core Competencies.</h2>
+        <p class="text-lg md:text-xl mb-12 reveal" style="color: var(--text-secondary);">I have experience with a wide range of technologies in the AI and data ecosystem.</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 reveal">
+            <div>
+                <h3 class="text-xl font-semibold mb-3">Languages</h3>
+                <ul class="space-y-4" style="color: var(--text-secondary);">
+                    <li class="flex items-center justify-center gap-2">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="w-6 h-6" alt="Python"/>
+                        Python
+                    </li>
+                    <li class="flex items-center justify-center gap-2">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="w-6 h-6" alt="SQL"/>
+                        SQL
+                    </li>
+                    <li class="flex items-center justify-center gap-2">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="w-6 h-6" alt="JavaScript"/>
+                        JavaScript
+                    </li>
+                    <li class="flex items-center justify-center gap-2">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" class="w-6 h-6" alt="C++"/>
+                        C++
+                    </li>
+                </ul>
             </div>
-        </section>
+            <div>
+                <h3 class="text-xl font-semibold mb-3">Frameworks</h3>
+                <ul class="space-y-4" style="color: var(--text-secondary);">
+                    <li class="flex items-center justify-center gap-2">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" class="w-6 h-6" alt="PyTorch"/>
+                        PyTorch
+                    </li>
+                    <li class="flex items-center justify-center gap-2">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" class="w-6 h-6" alt="TensorFlow"/>
+                        TensorFlow
+                    </li>
+                    <li class="flex items-center justify-center gap-2">
+                        <img src="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" class="w-6 h-6" alt="Scikit-learn"/>
+                        Scikit-learn
+                    </li>
+                    <li class="flex items-center justify-center gap-2">
+                        <img src="https://matplotlib.org/stable/_static/logo2.svg" class="w-6 h-6" alt="Matplotlib"/>
+                        Matplotlib
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-3">Tools</h3>
+                <ul class="space-y-4" style="color: var(--text-secondary);">
+                    <li class="flex items-center justify-center gap-2">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" class="w-6 h-6" alt="Docker"/>
+                        Docker
+                    </li>
+                    <li class="flex items-center justify-center gap-2">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="w-6 h-6" alt="Git"/>
+                        Git & GitHub
+                    </li>
+                    <li class="flex items-center justify-center gap-2">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" class="w-6 h-6" alt="AWS"/>
+                        AWS / GCP
+                    </li>
+                    <li class="flex items-center justify-center gap-2">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" class="w-6 h-6" alt="Kubernetes"/>
+                        Kubernetes
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-3">Databases</h3>
+                <ul class="space-y-4" style="color: var(--text-secondary);">
+                    <li class="flex items-center justify-center gap-2">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" class="w-6 h-6" alt="PostgreSQL"/>
+                        PostgreSQL
+                    </li>
+                    <li class="flex items-center justify-center gap-2">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" class="w-6 h-6" alt="MongoDB"/>
+                        MongoDB
+                    </li>
+                    <li class="flex items-center justify-center gap-2">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" class="w-6 h-6" alt="BigQuery"/>
+                        BigQuery
+                    </li>
+                    <li class="flex items-center justify-center gap-2">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" class="w-6 h-6" alt="Redis"/>
+                        Redis
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 
         <!-- Contact Section -->
-        <footer id="contact" class="py-20 px-6 border-t" style="border-color: var(--border);">
-            <div class="container mx-auto text-center">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 reveal">Let's Connect.</h2>
-                <p class="mb-8 max-w-lg mx-auto reveal" style="color: var(--text-secondary);">
-                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious vision.
-                </p>
-                 <div class="reveal mb-10">
-                    <a href="mailto:your-email@example.com" class="apple-button">Say Hello</a>
+        <footer id="contact" class="py-20 px-6 lg:px-8 border-t" style="border-color: var(--border);">
+            <div class="container mx-auto max-w-4xl">
+                <!-- Contact header -->
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold">Get in touch</h2>
+                    <p class="text-sm mt-2" style="color: var(--secondary-text-light);">Feel free to reach out for collaborations or just a friendly hello.</p>
                 </div>
-                <div class="flex justify-center space-x-6 reveal">
-                    <a href="mailto:your-email@example.com" class="social-icon">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"></path></svg>
-                    </a>
-                    <a href="https://github.com/your-username" target="_blank" class="social-icon">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.745 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"></path></svg>
-                    </a>
-                    <a href="https://linkedin.com/in/your-username" target="_blank" class="social-icon">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
-                    </a>
-                    <a href="https://instagram.com/your-username" target="_blank" class="social-icon">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.585.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.644-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"></path></svg>
-                    </a>
+
+                <!-- Two-column layout: info + form -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Left: Contact info -->
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-semibold">Email</h3>
+                            <a href="mailto:athayahanif.18@gmail.com" class="text-link">athayahanif.18@gmail.com</a>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Location</h3>
+                            <p style="color: var(--secondary-text-light);">South Jakarta, Indonesia</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Social</h3>
+                            <div class="flex gap-3 mt-2">
+                                <a class="social-icon" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+                                <a class="social-icon" href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Contact form (Formspree example) -->
+                    <div>
+                        <form id="contact-form" action="https://formspree.io/f/your-form-id" method="POST" class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium">Name</label>
+                                <input id="name" name="name" required class="w-full rounded-md p-2 bg-transparent border" />
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium">Email</label>
+                                <input id="email" type="email" name="email" required class="w-full rounded-md p-2 bg-transparent border" />
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium">Message</label>
+                                <textarea id="message" name="message" rows="5" required class="w-full rounded-md p-2 bg-transparent border"></textarea>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="apple-button">Send message</button>
+                            </div>
+                            <p id="form-status" class="text-sm mt-2" style="color: var(--secondary-text-light);"></p>
+                        </form>
+                    </div>
                 </div>
-                <p class="text-sm mt-10" style="color: var(--text-secondary);">&copy; 2024 [Your Name]. All rights reserved.</p>
+
+                <p class="text-center text-sm mt-10" style="color: var(--secondary-text-light);">© <span id="year"></span> Your Name. All rights reserved.</p>
             </div>
         </footer>
     </div>
+    
+          
+    <!-- 2. Then, update the JavaScript modal logic -->
+    <!-- Replace the existing modal logic in the script section with: -->
     
     <!-- Modals -->
     <div id="modal-project-1" class="modal-overlay">
         <div class="modal-container">
             <div class="relative">
-                <img src="https://placehold.co/800x500/1d1d1f/f5f5f7?text=Style+Transfer" class="w-full h-auto rounded-t-2xl" alt="Project 1 Hero Image">
+                <img src="assets/SER.jpg" class="w-full h-auto rounded-t-2xl" alt="Project 1 Hero Image">
                 <button class="modal-close-btn">&times;</button>
             </div>
             <div class="p-8 md:p-12">
-                <h3 class="text-3xl font-bold mb-4">Image Style Transfer</h3>
-                <p class="mb-6">This project implements the neural style transfer technique, which separates and recombines the content and style of arbitrary images. It uses a pre-trained VGG-19 network to extract feature representations and iteratively optimizes a new image to match the content of one image and the style of another.</p>
+                <h3 class="text-3xl font-bold mb-4">Speech Emotion Recognition (Audio Based)</h3>
+                <p class="mb-6">This project implements Mel-Frequency Cepstral Coefficient for extracting Audio features and leveraging Convolutional Neural Network architecture for Classification and predicting emotion based on speech</p>
                 <h4 class="text-xl font-semibold mb-3">Key Features:</h4>
                 <ul class="list-disc list-inside mb-6 space-y-1" style="color: var(--text-secondary);">
-                    <li>Content and style weight balancing</li>
-                    <li>Multi-scale style extraction</li>
-                    <li>Optimized for high-resolution output</li>
+                    <li>Mel-Frequency Cepstral Coefficient for extracting Audio</li>
+                    <li>Convolutional Neural Network</li>
+                    <li>Based on speech audio</li>
                 </ul>
                 <div class="flex flex-wrap gap-4">
-                    <a href="https://github.com/your-username/style-transfer-project" target="_blank" class="apple-button">View Code</a>
+                    <a href="https://github.com/tayaya-pnck/Speech-Emotion-Recognition" target="_blank" class="apple-button">View GitHub</a>
                 </div>
             </div>
         </div>
@@ -469,20 +547,20 @@
     <div id="modal-project-2" class="modal-overlay">
         <div class="modal-container">
             <div class="relative">
-                <img src="https://placehold.co/800x500/1d1d1f/f5f5f7?text=Sentiment+API" class="w-full h-auto rounded-t-2xl" alt="Project 2 Hero Image">
+                <img src="assets/analisis_data_updated.drawio (3).png" class="w-full h-auto rounded-t-2xl" alt="Project 2 Hero Image">
                 <button class="modal-close-btn">&times;</button>
             </div>
             <div class="p-8 md:p-12">
-                <h3 class="text-3xl font-bold mb-4">Sentiment Analysis API</h3>
-                <p class="mb-6">A high-performance RESTful API built with FastAPI that provides real-time sentiment analysis (positive, neutral, negative) for any given text. The model is based on a fine-tuned BERT architecture and the entire application is containerized with Docker for easy deployment and scalability.</p>
+                <h3 class="text-3xl font-bold mb-4">Lung Sound Classification Based on Audio</h3>
+                <p class="mb-6">Built a lung sound classification system using respiratory audio, extracting acoustic features via convolutional neural networks (CNN) and modeling temporal dependencies with Bidirectional GRU (BiGRU). The model effectively distinguishes inhalation, exhalation, and adventitious sounds (e.g., crackles, wheezes), improving upon baseline CNN-only approaches.</p>
                 <h4 class="text-xl font-semibold mb-3">Key Features:</h4>
                 <ul class="list-disc list-inside mb-6 space-y-1" style="color: var(--text-secondary);">
-                    <li>Fast inference times (&lt;50ms)</li>
-                    <li>Dockerized for portability</li>
-                    <li>Interactive API documentation via Swagger UI</li>
+                    <li>Classifies lung disease based on respiratory audio</li>
+                    <li>Removes external noise that affect lung sound using adaptive denoising pipeline</li>
+                    <li>Comparing 2 different models (CNN-BiGRU and CNN-LSTM) with both denoised and original data</li>
                 </ul>
                 <div class="flex flex-wrap gap-4">
-                    <a href="https://github.com/your-username/sentiment-api-project" target="_blank" class="apple-button">View Code</a>
+                    <a href="https://github.com/tayaya-pnck/LungSoundClassification/tree/main" target="_blank" class="apple-button">View GitHub</a>
                 </div>
             </div>
         </div>
@@ -495,16 +573,16 @@
                 <button class="modal-close-btn">&times;</button>
             </div>
             <div class="p-8 md:p-12">
-                <h3 class="text-3xl font-bold mb-4">Predictive Maintenance</h3>
-                <p class="mb-6">This project leverages time-series data from IoT sensors on industrial equipment to predict potential failures before they occur. An LSTM (Long Short-Term Memory) network was trained to recognize patterns indicative of future malfunctions, allowing for proactive maintenance scheduling.</p>
+                <h3 class="text-3xl font-bold mb-4">Smoker Classification</h3>
+                <p class="mb-6">Classifies weather a person is a smoker based on body signals using Naive Bayes Algorithm</p>
                 <h4 class="text-xl font-semibold mb-3">Key Features:</h4>
                 <ul class="list-disc list-inside mb-6 space-y-1" style="color: var(--text-secondary);">
-                    <li>Time-series data preprocessing and feature engineering</li>
-                    <li>LSTM model for sequence prediction</li>
+                    <li>Predicting based on body signals data</li>
+                    <li>Comparing various Naive Bayes Algorithm</li>
                     <li>Visualization dashboard for failure probability</li>
                 </ul>
                 <div class="flex flex-wrap gap-4">
-                    <a href="https://github.com/your-username/predictive-maintenance-project" target="_blank" class="apple-button">View Code</a>
+                    <a href="https://github.com/your-username/predictive-maintenance-project" target="_blank" class="apple-button">View GitHub</a>
                 </div>
             </div>
         </div>
@@ -636,6 +714,8 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
+                        // In the script section, replace the modal logic with:
+            
             // --- Modal Logic ---
             const openModalButtons = document.querySelectorAll('[data-modal-target]');
             
@@ -649,6 +729,20 @@
                     }
                 });
             });
+
+            // --- Modal Logic ---
+            // const openModalButtons = document.querySelectorAll('[data-modal-target]');
+            
+            // openModalButtons.forEach(button => {
+            //     button.addEventListener('click', () => {
+            //         const modalId = button.getAttribute('data-modal-target');
+            //         const modal = document.getElementById(modalId);
+            //         if (modal) {
+            //             modal.classList.add('visible');
+            //             document.body.classList.add('modal-open');
+            //         }
+            //     });
+            // });
 
             const closeModal = (modal) => {
                 modal.classList.remove('visible');
@@ -736,6 +830,46 @@
             }
 
             initThree();
+
+            // add this near the end of your DOMContentLoaded handler
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const statusEl = document.getElementById('form-status');
+                    const submitBtn = contactForm.querySelector('button[type="submit"]');
+                    const payload = {
+                        name: contactForm.name.value.trim(),
+                        email: contactForm.email.value.trim(),
+                        message: contactForm.message.value.trim()
+                    };
+                    if (!payload.name || !payload.email || !payload.message) {
+                        statusEl.textContent = 'Please fill all fields.';
+                        return;
+                    }
+                    submitBtn.disabled = true;
+                    statusEl.textContent = 'Sending...';
+
+                    try {
+                        const res = await fetch('/contact', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        const json = await res.json().catch(() => ({}));
+                        if (res.ok) {
+                            statusEl.textContent = 'Message sent — thank you!';
+                            contactForm.reset();
+                        } else {
+                            statusEl.textContent = json.error || 'Failed to send message.';
+                        }
+                    } catch (err) {
+                        statusEl.textContent = 'Network error. Is the backend running?';
+                    } finally {
+                        submitBtn.disabled = false;
+                    }
+                });
+            }
         });
     </script>
 </body>
